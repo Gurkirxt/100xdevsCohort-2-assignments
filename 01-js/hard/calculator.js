@@ -16,6 +16,49 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+  add(operand) {
+    this.result = this.result + operand;
+  }
+  subtract(operand) {
+    this.result = this.result - operand;
+  }
+  multiply(operand) {
+    this.result = this.result * operand;
+  }
+  divide(operand) {
+    if (operand === 0) {
+      throw new Error("Division by Zero ERROR!!!!");
+    } else {
+      this.result = this.result / operand;
+    }
+  }
+  clear() {
+    this.result = 0;
+  }
+  getResult() {
+    return this.result;
+  }
+
+  calculate(expression) {
+    
+    const clean_expression = expression.replace(/\s+/g, " ");
+    try {
+      this.result = eval(clean_expression);
+      if (!isFinite(this.result)) {
+        throw new Error("Result is infinte. Division by zero detected");
+      }
+    } catch (error) {
+      throw new Error("Error in evaluation");
+    }
+  }
+}
+
+const calc = new Calculator();
+
+calc.calculate('2 + 3 * 4');
 
 module.exports = Calculator;
